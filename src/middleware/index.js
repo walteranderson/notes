@@ -1,9 +1,11 @@
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 
+import authenticate from './authenticate'
 import errorHandler from './error-handler'
 import usersRouter from '../lib/users/router'
 import authRouter from '../lib/auth/router'
+import notesRouter from '../lib/notes/router'
 
 export default function registerMiddleware (app) {
   app.use(bodyParser.json())
@@ -13,6 +15,7 @@ export default function registerMiddleware (app) {
   app.get('/api/hello', (req, res) => res.json({ message: 'hello world' }))
   app.use('/api/users', usersRouter)
   app.use('/api/auth', authRouter)
+  app.use('/api/notes', authenticate, notesRouter)
 
   app.use(errorHandler)
 }

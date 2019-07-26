@@ -1,6 +1,7 @@
-import AuthService from '../auth/auth.service'
+import User from '../lib/users/user.model'
+import AuthService from '../lib/auth/auth.service'
 
-export default async (err, req, res, next) => {
+export default async (req, res, next) => {
   if (!req.headers.authorization) {
     return res.sendStatus(401)
   }
@@ -17,7 +18,7 @@ export default async (err, req, res, next) => {
     req.user = user
 
     next()
-  } catch(err) {
+  } catch (err) {
     console.error(err)
     res.send(401)
   }
