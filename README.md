@@ -1,8 +1,8 @@
 ## Install
 
 ```
-$ npm install
+$ yarn
 $ cp env.example .env
-$ npm run db:init
-$ npm start
+$ yarn run db:init
+$ yarn start
 ```
