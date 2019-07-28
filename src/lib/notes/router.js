@@ -10,12 +10,10 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { user, body } = req
-  const note = await user
-    .$relatedQuery('notes')
-    .insert({
-      ...body,
-      user_id: user.id
-    })
+  const note = await user.$relatedQuery('notes').insert({
+    ...body,
+    user_id: user.id
+  })
 
   res.send(note)
 })

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nf start api",
     "db:init": "knex migrate:latest && knex seed:run",
-    "lint": "standard --fix"
+    "lint": "prettier --write \"src/**/*.js\""
   },
   "keywords": [],
   "author": "",
@@ -18,10 +18,9 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
-    "babel-eslint": "^10.0.1",
     "faker": "^4.1.0",
     "nodemon": "^1.18.4",
-    "standard": "^13.0.1"
+    "prettier": "^1.18.2"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -34,8 +33,5 @@
     "morgan": "^1.9.1",
     "objection": "^1.3.0",
     "sqlite3": "^4.0.2"
-  },
-  "standard": {
-    "parser": "babel-eslint"
   }
 }

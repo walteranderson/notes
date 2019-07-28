@@ -7,7 +7,7 @@ export default {
    * @param  {String} password
    * @return {Promise}
    */
-  generate (password) {
+  generate(password) {
     return bcrypt.hash(password, SALT_ROUNDS)
   },
 
@@ -16,7 +16,7 @@ export default {
    * @param  {User}   user
    * @return {Promise}
    */
-  verify (password, user) {
+  verify(password, user) {
     return bcrypt.compare(password, user.password)
   }
 }

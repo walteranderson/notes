@@ -15,5 +15,8 @@ export default (err, req, res, next) => {
     body.type = 'NotFoundError'
   }
 
-  res.json(body).status(statusCode).end()
+  res
+    .json(body)
+    .status(statusCode)
+    .end()
 }
