@@ -1,6 +1,7 @@
-import Model from '../Model'
+import Model from '../model'
 import Note from '../notes/note.model'
 import Link from '../links/link.model'
+import Task from '../tasks/task.model'
 
 export default class User extends Model {
   static tableName = 'users'
@@ -26,6 +27,15 @@ export default class User extends Model {
       join: {
         from: 'users.id',
         to: 'links.user_id'
+      }
+    },
+
+    tasks: {
+      relation: Model.HasManyRelation,
+      modelClass: Task,
+      join: {
+        from: 'users.id',
+        to: 'tasks.user_id'
       }
     }
   }

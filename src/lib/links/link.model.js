@@ -1,4 +1,4 @@
-import Model from '../Model'
+import Model from '../model'
 import User from '../users/user.model'
 import Note from '../notes/note.model'
 
