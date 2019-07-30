@@ -1,4 +1,4 @@
-import { Model } from 'objection'
+import Model from '../Model'
 import User from '../users/user.model'
 import Note from '../notes/note.model'
 
@@ -24,8 +24,12 @@ export default class Link extends Model {
       relation: Model.ManyToManyRelation,
       modelClass: Note,
       join: {
-        from: 'notes_links.link_id',
-        to: 'notes_links.note_id'
+        from: 'links.id',
+        through: {
+          from: 'notes_links.link_id',
+          to: 'notes_links.note_id'
+        },
+        to: 'notes.id'
       }
     }
   }

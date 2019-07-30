@@ -12,8 +12,11 @@ router.post('/', async (req, res) => {
   try {
     const user = await AuthService.validate(email, password)
 
-    res.send(AuthService.generateToken(user.id))
+    res.json({
+      token: AuthService.generateToken(user.id)
+    })
   } catch (err) {
+    console.error(err)
     res.status(400).end()
   }
 })

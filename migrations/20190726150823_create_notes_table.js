@@ -6,6 +6,7 @@ exports.up = knex => {
       .unsigned()
       .notNullable()
     table.text('body')
+    table.timestamps()
   })
 }
 

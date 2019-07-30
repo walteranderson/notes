@@ -1,4 +1,4 @@
-import { Model } from 'objection'
+import Model from '../Model'
 import Note from '../notes/note.model'
 import Link from '../links/link.model'
 

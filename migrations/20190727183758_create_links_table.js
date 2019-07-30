@@ -7,6 +7,7 @@ exports.up = knex => {
       .notNullable()
     table.string('href')
     table.string('title')
+    table.timestamps()
   })
 }
 
