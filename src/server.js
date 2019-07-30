@@ -4,7 +4,7 @@ import config from './config'
 app.listen(config.server.port, config.server.ip, err => {
   if (err) {
     console.error('Unable to listen for connections', err)
-    process.exit(10)
+    process.exit(1)
   }
 
   console.log(
