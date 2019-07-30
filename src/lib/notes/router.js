@@ -40,11 +40,25 @@ router.get('/:id', async (req, res) => {
   res.send(note)
 })
 
+/**
+ * PATCH /api/notes/:id
+ */
 router.patch('/:id', async (req, res) => {
   const { id } = req.params
   const note = await Note.query().patchAndFetchById(id, req.body)
 
   res.send(note)
+})
+
+/**
+ * DELETE /api/notes/:id
+ */
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  await Note.query()
+    .delete()
+    .findById(id)
+  res.send(204)
 })
 
 export default router

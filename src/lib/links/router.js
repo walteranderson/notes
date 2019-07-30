@@ -4,12 +4,18 @@ import Note from '../notes/note.model'
 
 const router = Router()
 
+/**
+ * GET /api/links
+ */
 router.get('/', async (req, res) => {
   const { user } = req
   const links = await user.$relatedQuery('links')
   res.send(links)
 })
 
+/**
+ * POST /api/links
+ */
 router.post('/', async (req, res) => {
   const { user, body } = req
   const { href, title, note_id = null } = body
@@ -28,6 +34,40 @@ router.post('/', async (req, res) => {
   }
 
   res.send(link)
+})
+
+/**
+ * GET /api/links/:id
+ */
+router.get('/:id', async (req, res) => {
+  const { user, params } = req
+  const link = await user
+    .$relatedQuery('links')
+    .findById(params.id)
+    .throwIfNotFound()
+
+  res.send(link)
+})
+
+/**
+ * PATCH /api/links/:id
+ */
+router.patch('/:id', async (req, res) => {
+  const { id } = req.params
+  const link = await Link.query().patchAndFetchById(id, req.body)
+
+  res.send(link)
+})
+
+/**
+ * DELETE /api/links/:id
+ */
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  await Link.query()
+    .delete()
+    .findById(id)
+  res.send(204)
 })
 
 export default router
