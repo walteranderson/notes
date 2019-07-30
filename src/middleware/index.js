@@ -7,6 +7,7 @@ import usersRouter from '../lib/users/router'
 import authRouter from '../lib/auth/router'
 import notesRouter from '../lib/notes/router'
 import linksRouter from '../lib/links/router'
+import tasksRouter from '../lib/tasks/router'
 
 export default function registerMiddleware(app) {
   app.use(bodyParser.json())
@@ -18,6 +19,7 @@ export default function registerMiddleware(app) {
   app.use('/api/auth', authRouter)
   app.use('/api/notes', authenticate, notesRouter)
   app.use('/api/links', authenticate, linksRouter)
+  app.use('/api/tasks', authenticate, tasksRouter)
 
   app.use(errorHandler)
 }

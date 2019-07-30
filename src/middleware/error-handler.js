@@ -15,6 +15,7 @@ export default (err, req, res, next) => {
     body.type = 'NotFoundError'
   }
 
+  console.error(err)
   res
     .json(body)
     .status(statusCode)

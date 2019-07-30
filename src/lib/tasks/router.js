@@ -1,5 +1,6 @@
 import Router from 'express-promise-router'
 import Task from './task.model'
+import Note from '../notes/note.model'
 
 const router = Router()
 
@@ -16,11 +17,21 @@ router.get('/', async (req, res) => {
  * POST /api/tasks
  */
 router.post('/', async (req, res) => {
-  const { user, body } = req
-  const task = await user.$relatedQuery('tasks').insert({
-    ...body,
-    user_id: user.id
+  const { user } = req
+  const { description, note_id = null } = req.body
+
+  const task = await Task.query().insert({
+    user_id: user.id,
+    description
   })
+
+  if (note_id) {
+    const note = await user
+      .$relatedQuery('notes')
+      .findById(note_id)
+      .throwIfNotFound()
+    await note.$relatedQuery('tasks').relate(task.id)
+  }
 
   res.send(task)
 })
@@ -61,3 +72,5 @@ router.delete('/:id', async (req, res) => {
     .findById(id)
   res.send(204)
 })
+
+export default router

@@ -21,14 +21,10 @@ export default class Link extends Model {
     },
 
     notes: {
-      relation: Model.ManyToManyRelation,
+      relation: Model.BelongsToRelation,
       modelClass: Note,
       join: {
-        from: 'links.id',
-        through: {
-          from: 'notes_links.link_id',
-          to: 'notes_links.note_id'
-        },
+        from: 'links.note_id',
         to: 'notes.id'
       }
     }

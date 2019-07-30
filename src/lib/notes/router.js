@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
   const { user, params } = req
   const note = await user
     .$relatedQuery('notes')
-    .eager('links')
+    .eager('[links, tasks]')
     .findById(params.id)
     .throwIfNotFound()
 
