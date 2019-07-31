@@ -15,6 +15,7 @@ export default async (req, res, next) => {
   try {
     const decoded = await AuthService.verifyToken(token)
     const user = await User.query().findOne({ id: decoded.id })
+    delete user.password
     req.user = user
 
     next()
