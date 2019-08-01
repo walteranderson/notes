@@ -1,4 +1,5 @@
 import Router from 'express-promise-router'
+import { transaction } from 'objection'
 import Task from './task.model'
 import Note from '../notes/note.model'
 
@@ -20,18 +21,22 @@ router.post('/', async (req, res) => {
   const { user } = req
   const { description, note_id = null } = req.body
 
-  const task = await Task.query().insert({
-    user_id: user.id,
-    description
-  })
+  const task = await transaction(Task.knex(), async trx => {
+    const task = await Task.query(trx).insert({
+      user_id: user.id,
+      description
+    })
 
-  if (note_id) {
-    const note = await user
-      .$relatedQuery('notes')
-      .findById(note_id)
-      .throwIfNotFound()
-    await note.$relatedQuery('tasks').relate(task.id)
-  }
+    if (note_id) {
+      const note = await user
+        .$relatedQuery('notes', trx)
+        .findById(note_id)
+        .throwIfNotFound()
+      await note.$relatedQuery('tasks', trx).relate(task.id)
+    }
+
+    return task
+  })
 
   res.send(task)
 })
@@ -66,10 +71,15 @@ router.patch('/:id', async (req, res) => {
  * DELETE /api/tasks/:id
  */
 router.delete('/:id', async (req, res) => {
-  const { id } = req.params
-  await Task.query()
-    .delete()
+  const { user, params } = req
+  const { id } = params
+
+  const task = await user
+    .$relatedQuery('tasks')
     .findById(id)
+    .throwIfNotFound()
+
+  await task.$query.delete()
   res.send(204)
 })
 

@@ -1,4 +1,5 @@
 import Router from 'express-promise-router'
+import { transaction } from 'objection'
 import Link from './link.model'
 import Note from '../notes/note.model'
 
@@ -20,18 +21,23 @@ router.post('/', async (req, res) => {
   const { user, body } = req
   const { href, title, note_id = null } = body
 
-  const link = await Link.query().insert({
-    user_id: user.id,
-    href,
-    title
-  })
+  const link = await transaction(Link.knex(), async trx => {
+    const link = await Link.query(trx).insert({
+      user_id: user.id,
+      href,
+      title
+    })
 
-  if (note_id) {
-    const note = await Note.query()
-      .findById(note_id)
-      .throwIfNotFound()
-    await note.$relatedQuery('links').relate(link.id)
-  }
+    if (note_id) {
+      const note = await user
+        .$relatedQuery('notes', trx)
+        .findById(note_id)
+        .throwIfNotFound()
+      await note.$relatedQuery('links', trx).relate(link.id)
+    }
+
+    return link
+  })
 
   res.send(link)
 })
@@ -45,7 +51,6 @@ router.get('/:id', async (req, res) => {
     .$relatedQuery('links')
     .findById(params.id)
     .throwIfNotFound()
-
   res.send(link)
 })
 
@@ -53,20 +58,30 @@ router.get('/:id', async (req, res) => {
  * PATCH /api/links/:id
  */
 router.patch('/:id', async (req, res) => {
-  const { id } = req.params
-  const link = await Link.query().patchAndFetchById(id, req.body)
+  const { user, params, body } = req
+  const { id } = params
+  const link = await user
+    .$relatedQuery('links')
+    .findById(id)
+    .throwIfNotFound()
 
-  res.send(link)
+  const updatedLink = await link.$query().patchAndFetch(body)
+  res.send(updatedLink)
 })
 
 /**
  * DELETE /api/links/:id
  */
 router.delete('/:id', async (req, res) => {
-  const { id } = req.params
-  await Link.query()
-    .delete()
+  const { user, params } = req
+  const { id } = params
+
+  const link = await user
+    .$relatedQuery('links')
     .findById(id)
+    .throwIfNotFound()
+
+  await link.$query().delete()
   res.send(204)
 })
 
