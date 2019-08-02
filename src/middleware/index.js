@@ -1,5 +1,7 @@
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
+import helmet from 'helmet'
+import cors from 'cors'
 
 import authenticate from './authenticate'
 import errorHandler from './error-handler'
@@ -13,6 +15,8 @@ export default function registerMiddleware(app) {
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(morgan('dev'))
+  app.use(helmet())
+  app.use(cors())
 
   app.get('/', (req, res) => res.json({ message: 'hello world' }))
   app.use('/api/users', usersRouter)

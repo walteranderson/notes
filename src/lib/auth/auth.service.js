@@ -6,7 +6,9 @@ const AUTH_KEY = process.env.AUTH_KEY
 
 export default {
   async validate(email, password) {
-    const user = await User.query().findOne({ email })
+    const user = await User.query()
+      .findOne({ email })
+      .throwIfNotFound()
 
     const isValid = await PasswordService.verify(password, user)
     if (!isValid) throw new Error('Invalid credentials')
