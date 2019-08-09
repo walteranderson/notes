@@ -9,10 +9,7 @@ const router = Router()
 /**
  * GET /api/users/me
  */
-router.get('/me', authenticate, async (req, res) => {
-  const user = await req.user.$loadRelated('[notes,links,tasks,tags]')
-  res.send(user)
-})
+router.get('/me', authenticate, async (req, res) => res.send(req.user))
 
 /**
  * POST /api/users
