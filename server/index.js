@@ -1,11 +1,13 @@
 import app from './app'
 import config from './config'
 
-app.listen(config.server.port, err => {
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, err => {
   if (err) {
     console.error('Unable to listen for connections', err)
     process.exit(1)
   }
 
-  console.log(`Server is listening on http://localhost:${config.server.port}`)
+  console.log(`Server is listening on http://localhost:${PORT}`)
 })

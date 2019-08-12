@@ -5,10 +5,6 @@ export default {
     return this.env === 'production'
   },
 
-  server: {
-    port: process.env.PORT || 3000
-  },
-
   knexConfig() {
     return this.env === 'development' ? this.db.sqlite : this.db.mysql
   },
