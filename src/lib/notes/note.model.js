@@ -9,7 +9,7 @@ export default class Note extends Model {
 
   static jsonSchema = {
     type: 'object',
-    required: ['user_id']
+    required: ['title', 'user_id']
   }
 
   static relationMappings = {

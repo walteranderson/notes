@@ -5,6 +5,7 @@ exports.up = knex => {
       .integer('user_id')
       .unsigned()
       .notNullable()
+    table.string('title').notNullable()
     table.text('body')
     table.timestamps()
   })
