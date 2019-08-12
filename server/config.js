@@ -6,8 +6,7 @@ export default {
   },
 
   server: {
-    ip: process.env.SERVER_IP || '127.0.0.1',
-    port: process.env.SERVER_PORT || 3000
+    port: process.env.PORT || 3000
   },
 
   knexConfig() {

@@ -1,2 +1,2 @@
-api: nodemon src/server --exec babel-node
-
+api: nodemon ./server --exec babel-node
+web: react-scripts start
