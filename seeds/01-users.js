@@ -9,7 +9,8 @@ exports.seed = knex =>
     .then(() => PasswordGenerator.generate('notsecret'))
     .then(password => {
       return knex(TABLE_NAME).insert({
-        email: 'example@email.com',
+        email: 'email@example.com',
+        username: 'John Doe',
         password
       })
     })

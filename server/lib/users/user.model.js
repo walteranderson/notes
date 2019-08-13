@@ -9,7 +9,7 @@ export default class User extends Model {
 
   static jsonSchema = {
     type: 'object',
-    required: ['email', 'password']
+    required: ['username', 'email', 'password']
   }
 
   static relationMappings = {
