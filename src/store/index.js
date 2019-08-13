@@ -3,7 +3,7 @@ import logger from 'redux-logger'
 import { createStore, compose, applyMiddleware } from 'redux'
 import reducers from './modules'
 
-export default (initialState) => {
+export default initialState => {
   const middlewares = [thunk, logger]
 
   const composeEnhancers =

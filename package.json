@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nf start api,web",
     "db:init": "knex migrate:latest && knex seed:run",
-    "lint": "prettier --write \"src/**/*.js\""
+    "lint": "prettier --write \"{src,server}/**/*.js\""
   },
   "keywords": [],
   "author": "",
