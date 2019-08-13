@@ -1,6 +1,6 @@
 const {
   default: PasswordGenerator
-} = require('../src/lib/users/password.service')
+} = require('../server/lib/users/password.service')
 const TABLE_NAME = 'users'
 
 exports.seed = knex =>
