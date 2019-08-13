@@ -1,4 +1,5 @@
-import { makeActionCreator } from '../../utils/makeActions'
+import { makeActionCreator } from '../makeActions'
+import { HYDRATE_SENDING, HYDRATE_SUCCESS, HYDRATE_FAILED } from './hydrate'
 import * as api from '../../api'
 
 // ACTIONS
@@ -46,7 +47,6 @@ export const logout = () => dispatch => {
   return api.logout().then(() => dispatch(logoutSuccess()))
 }
 
-
 // REDUCER
 
 const initialState = {
@@ -68,6 +68,7 @@ export default (state = initialState, action) => {
 
   switch (type) {
     case LOGIN_SENDING:
+    case HYDRATE_SENDING:
       return {
         ...state,
         isAuthenticated: false,
@@ -78,6 +79,7 @@ export default (state = initialState, action) => {
       }
 
     case LOGIN_SUCCESS:
+    case HYDRATE_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
@@ -88,6 +90,7 @@ export default (state = initialState, action) => {
       }
 
     case LOGIN_FAILED:
+    case HYDRATE_FAILED:
       return {
         ...state,
         isAuthenticated: false,

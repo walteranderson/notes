@@ -1,4 +1,4 @@
-import { makeActionCreator } from '../../utils/makeActions'
+import { makeActionCreator } from '../makeActions'
 import * as api from '../../api'
 
 // ACTIONS
