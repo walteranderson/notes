@@ -30,6 +30,6 @@ export const hydrate = () => dispatch => {
     })
     .catch(err => {
       dispatch(hydrateFailed(err))
-      return api.logout()
+      // return api.logout()
     })
 }
