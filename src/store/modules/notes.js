@@ -44,6 +44,7 @@ export const createNote = payload => dispatch => {
 const initialState = {
   data: [],
   sending: false,
+  fetched: false,
   error: null
 }
 
@@ -55,18 +56,21 @@ export default (state = initialState, action) => {
       return {
         data: [],
         sending: true,
+        fetched: false,
         error: null
       }
     case GET_NOTES_SUCCESS:
       return {
         data: payload.notes,
         sending: false,
+        fetched: true,
         error: null
       }
     case GET_NOTES_FAILED:
       return {
         data: [],
         sending: false,
+        fetched: false,
         error: payload.error
       }
     default:

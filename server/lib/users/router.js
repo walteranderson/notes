@@ -9,7 +9,11 @@ const router = Router()
 /**
  * GET /api/users/me
  */
-router.get('/me', authenticate, async (req, res) => res.send(req.user))
+router.get('/me', authenticate, async (req, res) => {
+  const user = await req.user.$query().eager('[notes]')
+  delete user.password
+  res.send(user)
+})
 
 /**
  * POST /api/users

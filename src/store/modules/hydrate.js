@@ -1,6 +1,7 @@
 import * as api from '../../api'
 import { makeActionCreator } from '../makeActions'
 import { getUserSuccess } from './auth'
+import { getNotesSuccess } from './notes'
 
 export const HYDRATE_SENDING = 'auth/HYDRATE_SENDING'
 export const hydrateSending = makeActionCreator(HYDRATE_SENDING)
@@ -25,7 +26,11 @@ export const hydrate = () => dispatch => {
   return api
     .getUser()
     .then(user => {
+      const { notes } = user
+      delete user.notes
+
       dispatch(getUserSuccess(user))
+      dispatch(getNotesSuccess(notes))
       dispatch(hydrateSuccess())
     })
     .catch(err => {
