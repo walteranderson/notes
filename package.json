@@ -27,6 +27,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "faker": "^4.1.0",
     "immutable": "^4.0.0-rc.12",
+    "lodash": "^4.17.15",
     "nodemon": "^1.18.4",
     "prettier": "^1.18.2",
     "react": "^16.9.0",
@@ -36,7 +37,8 @@
     "react-scripts": "^3.1.0",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "rich-markdown-editor": "https://github.com/walteranderson/rich-markdown-editor.git#master"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",

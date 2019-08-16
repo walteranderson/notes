@@ -5,6 +5,8 @@ import ClearIcon from '@material-ui/icons/Clear'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import { withRouter } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { createNote } from '../../store/modules/notes'
 import Form from './Form'
 
 const useStyles = makeStyles({
@@ -19,11 +21,12 @@ const useStyles = makeStyles({
 
 const Create = ({ history }) => {
   const styles = useStyles()
+  const dispatch = useDispatch()
   const goBack = () => history.goBack()
 
-  const onSubmit = e => {
+  const onSubmit = (e, form) => {
     e.preventDefault()
-    console.log('hello')
+    dispatch(createNote(form))
   }
 
   return (

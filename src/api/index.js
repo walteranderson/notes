@@ -26,3 +26,7 @@ export const getUser = () => {
 export const getNotes = () => {
   return http.get('/api/notes').then(res => res.data)
 }
+
+export const createNote = payload => {
+  return http.post('/api/notes', payload).then(res => res.data)
+}

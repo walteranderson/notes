@@ -21,6 +21,24 @@ export const getNotes = () => dispatch => {
     .catch(err => dispatch(getNotesFailed(err)))
 }
 
+export const CREATE_NOTE_SENDING = 'notes/CREATE_NOTE_SENDING'
+export const createNoteSending = makeActionCreator(CREATE_NOTE_SENDING)
+
+export const CREATE_NOTE_SUCCESS = 'notes/CREATE_NOTE_SUCCESS'
+export const createNoteSuccess = makeActionCreator(CREATE_NOTE_SUCCESS, 'note')
+
+export const CREATE_NOTE_FAILED = 'notes/CREATE_NOTE_FAILED'
+export const createNoteFailed = makeActionCreator(CREATE_NOTE_FAILED, 'error')
+
+export const createNote = payload => dispatch => {
+  dispatch(createNoteSending())
+
+  return api
+    .createNote(payload)
+    .then(note => dispatch(createNoteSuccess(note)))
+    .catch(err => dispatch(createNoteFailed(err)))
+}
+
 // REDUCER
 
 const initialState = {
