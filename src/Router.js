@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import UnAuthRoute from './components/UnAuthRoute'
-import AuthRoute from './components/AuthRoute'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import Route from './components/Route'
 import Loading from './components/Loading'
 
 const Login = React.lazy(() => import('./components/Login'))
@@ -13,8 +12,8 @@ export default () => (
     <Suspense fallback={<Loading />}>
       <Switch>
         <Route path="/" exact component={Home} />
-        <UnAuthRoute path="/login" exact component={Login} />
-        <AuthRoute path="/notes" exact component={NotesList} />
+        <Route guest path="/login" exact component={Login} />
+        <Route authenticate path="/notes" exact component={NotesList} />
       </Switch>
     </Suspense>
   </Router>
