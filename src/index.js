@@ -5,6 +5,8 @@ import createStore from './store'
 import Router from './Router'
 import { hydrate } from './store/modules/hydrate'
 
+import './index.css'
+
 const store = createStore()
 
 store.dispatch(hydrate())

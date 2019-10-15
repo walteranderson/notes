@@ -1,0 +1,22 @@
+.Container {
+  width: 250px;
+  box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, 0.65);
+  padding-left: 1rem;
+  background-color: white;
+}
+
+.Collapsed {
+  width: 50px;
+  padding: 0;
+}
+
+.Collapsed h1 {
+  display: none;
+}
+
+.ExpandIcon {
+  font-size: 2rem;
+  padding: 10px;
+  cursor: pointer;
+  float: right;
+}

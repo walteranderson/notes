@@ -1,0 +1,9 @@
+.Container {
+  display: flex;
+  height: 100vh;
+}
+
+.Content {
+  flex-grow: 1;
+  padding: 1rem;
+}

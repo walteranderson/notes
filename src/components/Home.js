@@ -20,7 +20,7 @@ export default () => {
 
   return (
     <div>
-      <p>home</p>
+      <span>home</span>
       {isAuthenticated ? <Authenticated /> : <Link to="/login">Login</Link>}
     </div>
   )

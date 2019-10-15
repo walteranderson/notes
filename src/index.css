@@ -1,0 +1,7 @@
+@import-normalize;
+
+body {
+  margin: 0;
+  font-family: -apple-system, 'Roboto', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: rgb(244, 245, 247);
+}
