@@ -58,10 +58,7 @@ router.get('/:id', async (req, res) => {
  */
 router.patch('/:id', async (req, res) => {
   const { id } = req.params
-  const task = await user
-    .$relatedQuery('tasks')
-    .findById(id)
-    .throwIfNotFound()
+  const task = await user.$relatedQuery('tasks').findById(id).throwIfNotFound()
 
   const updatedTask = await task.$query().patchAndFetch(req.body)
   res.send(updatedTask)
@@ -74,10 +71,7 @@ router.delete('/:id', async (req, res) => {
   const { user, params } = req
   const { id } = params
 
-  const task = await user
-    .$relatedQuery('tasks')
-    .findById(id)
-    .throwIfNotFound()
+  const task = await user.$relatedQuery('tasks').findById(id).throwIfNotFound()
 
   await task.$query.delete()
   res.send(204)

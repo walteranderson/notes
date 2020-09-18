@@ -16,8 +16,5 @@ export default (err, req, res, next) => {
   }
 
   console.error(err)
-  res
-    .json(body)
-    .status(statusCode)
-    .end()
+  res.json(body).status(statusCode).end()
 }

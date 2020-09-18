@@ -55,9 +55,7 @@ router.patch('/:id', async (req, res) => {
  */
 router.delete('/:id', async (req, res) => {
   const { id } = req.params
-  await Note.query()
-    .delete()
-    .findById(id)
+  await Note.query().delete().findById(id)
   res.send(204)
 })
 

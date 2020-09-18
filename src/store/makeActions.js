@@ -1,6 +1,6 @@
 export const makeActionCreator = (type, ...argNames) => {
   let action = { type }
-  return function(...args) {
+  return function (...args) {
     const payload = {}
     argNames.forEach((arg, index) => {
       payload[argNames[index]] = args[index]
